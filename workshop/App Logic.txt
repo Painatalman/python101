@@ -1,0 +1,16 @@
+
+At the Start
+	# Get Player names
+	# Determinates who's first
+	# First player fills the board
+	# Second player fills the board
+	
+Main Loop
+	# Checks if all the ships are sunked
+		+ if one of the players have all the ships sunked, loses
+    # Checks what turn is it
+        + Chose a new position to attack
+            - Checks if the other player has any ships in that position
+                * if a ship is hitted, the ship's segment is destroyed
+                    # if all segments are destroyed, shunk ship
+    # Change Player
