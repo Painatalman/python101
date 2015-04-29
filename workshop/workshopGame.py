@@ -11,18 +11,95 @@ class Game(object):
     def __init__(self):
         self.__name = "Battleship"
         self.__player = []
-        self.__board = [[0 for i in range(10)] for j in range(10)]
 
     def getPlayer(self, numberOfPlayer):
-        return self.__player[numberOfPlayer-1]
+        if len(self.__player) > 0:
+            return self.__player[numberOfPlayer-1]
+        else:
+            return False
 
+    # Returns who is the player to play
+    def getPlayerToPlay(self):
+        if self.getPlayer(1).getTurn():
+            return 1
+        else:
+            return 2
+
+    # Returns who is the player to Attack
+    def getPlayerToAttack(self):
+        if self.getPlayer(1).getTurn():
+            return 2
+        else:
+            return 1
+
+    # Change player to play
+    def setNewTurn(self):
+        self.getPlayer(1).setTurn()
+        self.getPlayer(2).setTurn()
+
+    # Determinates who is the first player
     def coinToss(self):
         if(random() > 0.5):
             return 2
         else:
             return 1
 
-    def showBoard(self):
+    # Checks if x and y are valid
+    def validadesCoordinates(self, x, y):
+        # Checks if position is valid
+        if(int(x) < 10 and int(x) >= 0 and int(y) < 10 and int(y) >= 0):
+            return True
+        else:
+            return False
+
+    # Set a new ship on the board
+    def setShip(self, x, y, playerNumber):
+        # Verifies if x and y are in the board
+        if self.validadesCoordinates(x, y):
+            # Verifies if there is a ship in the x and x position
+            if self.getPlayer(playerNumber).getMainBoard()[x][y] == 1:
+                print "Invalid position: There is a ship in that position"
+                return False
+            else:
+                print "Ship inserted at position: (" + str(x) + ", " + str(y) + ")"
+                self.getPlayer(playerNumber).getMainBoard()[x][y] = 1
+                return True
+        else:
+            print "Invalid position: Out of bounds"
+            return False
+
+    # Set initial ships
+    def setStartShips(self):
+        for i in range(0, 5):
+
+            while True:
+                print "Insert the coordinates of ship " + str(i+1)
+                x = int(raw_input())
+                y = int(raw_input())
+                if self.setShip(x, y, self.getPlayerToPlay())== True:
+                    break
+
+    # Fires to the other player's board and register the current player action
+    def mainboardFire(self, x, y):
+        # Check who is the player to fire
+        if getPlayer(1).getTurn():
+            getPlayer(1).SetFireBoard(x, y, 1)
+            getPlayer(2).SetMainBoard(x, y, 0)
+        else:
+            getPlayer(2).SetFireBoard(x, y, 1)
+            getPlayer(1).SetMainBoard(x, y, 0)
+
+    # Checks if all of player's ships are sunked
+    def mainboardCheck(self, playerNumber):
+        gameOver = True
+        for row in self.getPlayer(playerNumber).getMainBoard():
+            for col in row:
+                if col != 0:
+                    gameOver = False
+        return gameOver
+
+    # Show fire board
+    def fireBoardShow(self, playerNumber):
         rowNumber = 0
         print "Board:\n  |",
         # Column Numbers
@@ -32,7 +109,7 @@ class Game(object):
         # Line Top
         print "-" * 25,
         print
-        for row in self.__board:
+        for row in getPlayer(playerNumber).getMainBoard():
             # Row Numbers
             print str(rowNumber) + " |",
             # Print Board
@@ -41,32 +118,67 @@ class Game(object):
             print "|"
             rowNumber += 1
 
+    # Show main board
+    def mainboardShow(self, playerNumber):
+        rowNumber = 0
+        print "Board:\n  |",
+        # Column Numbers
+        for i in range(0, 10):
+            print i,
+        print "|"
+        # Line Top
+        print "-" * 25,
+        print
+        for row in self.getPlayer(playerNumber).getMainBoard():
+            # Row Numbers
+            print str(rowNumber) + " |",
+            # Print Board
+            for col in row:
+                print col,
+            print "|"
+            rowNumber += 1
+
+    # Runs the game
     def start(self):
         print "Insert First Player Name:"
         # DEBUG
-        #player = Player(raw_input())
-        player = Player("Fonseca")
+        player = Player(raw_input())
+        #player = Player("Fonseca")
         self.__player.append(player)
         print "Insert Second Player Name:"
         # DEBUG
-        #player = Player(raw_input())
-        player = Player("Meireles")
+        player = Player(raw_input())
+        #player = Player("Meireles")
         self.__player.append(player)
         # Determinates who goes first
         toss = self.coinToss()
         self.getPlayer(toss).setTurn()
-        print "Player " + self.getPlayer(toss).getName() + " starts"
+        print self.getPlayer(self.getPlayerToPlay()).getName() + " starts"
         # First player fills the board
-        self.showBoard()
+        self.mainboardShow(self.getPlayerToPlay())
+        self.setStartShips()
+        self.setNewTurn()
         # Second player fills the board
-
-
+        print self.getPlayer(self.getPlayerToPlay()).getName() + " starts"
+        self.mainboardShow(self.getPlayerToPlay())
+        self.setStartShips()
+        # Start Game
+        self.setNewTurn()
         self.mainLoop()
 
+    # Main loop of the game
     def mainLoop(self):
-        # Checks if all the ships are sunked
-            # if one of the players have all the ships sunked, loses
-        # Checks what turn is it
+        while True:
+            # Checks if all the ships are sunked
+            if self.mainboardCheck(self.getPlayerToPlay()):
+                # if the current player have all the ships sunked, loses
+                print "Game Over: Player " + self.getPlayerToAttack() + " wins!"
+                break
+            else:
+                print "Player " + self.getPlayerToAttack() + "Turn! Chose what to do:"
+                command = raw_input()
+                
+        
             # Chose a new position to attack
                 # Checks if the other player has any ships in that position
                     # if a ship is hitted, the ship's segment is destroyed

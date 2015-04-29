@@ -9,7 +9,8 @@ class Player(object):
         self.__name = name
         self.__turn = False
         self.__wins = 0
-        self.__ships = Ship()
+        self.__mainboard = [[0 for i in range(10)] for j in range(10)]
+        self.__fireboard = [[0 for i in range(10)] for j in range(10)]
 
     def addVictory(self):
         self.__wins += 1
@@ -17,14 +18,39 @@ class Player(object):
     def getVictories(self):
         return self.__wins
 
+    # Checks if x and y are valid
+    def validadesCoordinates(self, x, y):
+        # Checks if position is valid
+        if(x < 10 and x >= 0 and y < 10 and y >= 0):
+            return True
+        else:
+            return False
+
     def getName(self):
         return self.__name
 
     def getTurn(self):
         return self.__turn
 
-    def getShips(self):
-        return self.__ships
+    def getMainBoard(self):
+        return self.__mainboard
+
+    def getFireBoard(self):
+        return self.__fireboard
+
+    def SetFireBoard(self, x, y, type):
+        if validadesCoordinates(x, y):
+            self.__fireboard[y][x] = type
+            return True
+        else:
+            return False
+
+    def SetMainBoard(self, x, y, type):
+        if validadesCoordinates(x, y):
+            self.__fireboard[y][x] = type
+            return True
+        else:
+            return False
 
     def setName(self, name):
         self.__name = name

@@ -35,20 +35,14 @@ def testsPoint():
 def testsPlayer():
     print "Player\n-----"
     player1 = Player("João")
-    print player1.getName()
-    print player1.getVictories()
-    print "Turn:\t" + str(player1.getTurn())
-    player1.setTurn()
-    print "Turn:\t" + str(player1.getTurn())
-    player1.setTurn()
-    print "Turn:\t" + str(player1.getTurn())
-    player1.addVictory()
-    player1.setName("Joana")
-    print player1.getName()
-    print player1.getVictories()
-    print player1.getShips().getNumberOfShips()
-    player1.getShips().addShip("Aircraft")
-    print player1.getShips().getNumberOfShips()
     print "\n"
 
-testsPlayer()
+
+def testGame():
+    game = Game()
+    print game.validadesCoordinates(0, 0)
+    print game.validadesCoordinates(-1, -1)
+    print game.validadesCoordinates(10, 10)
+    print game.validadesCoordinates(9, 9)
+
+testGame()
