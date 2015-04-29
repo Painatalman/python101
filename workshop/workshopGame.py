@@ -32,17 +32,17 @@ class Game(object):
         else:
             return 1
 
-    # Change player to play
-    def setNewTurn(self):
-        self.getPlayer(1).setTurn()
-        self.getPlayer(2).setTurn()
-
     # Determinates who is the first player
     def coinToss(self):
         if(random() > 0.5):
             return 2
         else:
             return 1
+
+    # Change player to play
+    def setNewTurn(self):
+        self.getPlayer(1).setTurn()
+        self.getPlayer(2).setTurn()
 
     # Checks if x and y are valid
     def validadesCoordinates(self, x, y):
@@ -74,9 +74,11 @@ class Game(object):
 
             while True:
                 print "Insert the coordinates of ship " + str(i+1)
+                print "X: ",
                 x = int(raw_input())
+                print "Y: ",
                 y = int(raw_input())
-                if self.setShip(x, y, self.getPlayerToPlay())== True:
+                if self.setShip(x, y, self.getPlayerToPlay()):
                     break
 
     # Fires to the other player's board and register the current player action
@@ -138,19 +140,21 @@ class Game(object):
             print "|"
             rowNumber += 1
 
+    # Adds a new player
+    def addPlayer(self):
+        print "Insert Player Name: ",
+        player = Player(raw_input())
+        self.__player.append(player)
+        print "Added Player " + player.getName()
+
     # Runs the game
     def start(self):
-        print "Insert First Player Name:"
-        # DEBUG
-        player = Player(raw_input())
-        #player = Player("Fonseca")
-        self.__player.append(player)
-        print "Insert Second Player Name:"
-        # DEBUG
-        player = Player(raw_input())
-        #player = Player("Meireles")
-        self.__player.append(player)
-        # Determinates who goes first
+        # Greeting
+        print "Welcome to " + self.__name
+        # Add Players
+        self.addPlayer()
+        self.addPlayer()
+        # Determinates who is the first Player
         toss = self.coinToss()
         self.getPlayer(toss).setTurn()
         print self.getPlayer(self.getPlayerToPlay()).getName() + " starts"
@@ -175,13 +179,33 @@ class Game(object):
                 print "Game Over: Player " + self.getPlayerToAttack() + " wins!"
                 break
             else:
-                print "Player " + self.getPlayerToAttack() + "Turn! Chose what to do:"
+                # Input Command
+                print "Player " + self.getPlayer(self.getPlayerToPlay()).getName() + " Turn! Chose what to do:"
+                print "1: Show Ship Board"
+                print "2: Show Fire Board"
+                print "3: Shoot a Ship!"
                 command = raw_input()
-                
-        
+
+                if int(command) == 1:
+                    self.mainBoardShow(self.getPlayerToPlay())
+                elif int(command) == 2:
+                    self.fireBoardShow(self.getPlayerToPlay())
+                elif int(command) == 3:
+                    "Fire to other player board!\nInsert coordinates:"
+                    print "X: ",
+                    x = int(raw_input())
+                    print "Y: ",
+                    y = int(raw_input())
+                    # Set Player's Fire Board
+                    self.getPlayer(self.getPlayerToPlay()).SetFireBoard(x, y, 1)
+                    # Set Other Player's Main Board
+                    self.getPlayer(self.getPlayerToAttack()).SetMainBoard(x, y, 0)
+                    print "Shoot player " + self.getPlayer(self.getPlayerToAttack()).getName() + " at position (" + str(x) + ", " + str(y) + ")"
+                else:
+                    print "Invalid command: Insert a valid number (1, 2 or 3)"
+
             # Chose a new position to attack
                 # Checks if the other player has any ships in that position
                     # if a ship is hitted, the ship's segment is destroyed
                         # if all segments are destroyed, shunk ship
         # Change turns
-        pass
