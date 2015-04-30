@@ -1,0 +1,37 @@
+Workshop Structure
+
+Todo
+	* Implementar um dicionário com as opções do tabuleiro do jogo
+	options = {
+		"gridSizeX": 10
+		"gridSizeY": 10
+		"numberOfPlayers": 2
+	}
+
+
+1. Regras do jogo
+	a) Elementos:
+		* 2 jogadores
+		* 2 grelhas por jogador (típicamente 10x10):
+			+ Grelha com os navios
+			+ Grelha com os disparos
+	b) Início
+		* Determina-se qual é o primeiro jogador
+		* Os jogadores colocam os navios na grelha
+			+ Os navios não se podem sobrepôr
+			+ Todos os segmentos do navio têm que estar juntos sem intervalos
+			+ Todos os segmentos devem estar alinhados ou verticalmente ou horizontalmente
+			+ O número de segmentos de cada navio é determinado pelo seu tipo:
+				- Aircraft: 5
+				- Battleship: 4
+				- Submarine: 3
+				- Destroyer (ou Cruiser): 3
+				- Patrol boat (ou destroyer): 2
+	c) Loop principal
+		* Se o jogador actual não tiver navios
+			+ O outro jogador ganhou o jogo!
+			+ Termina
+		* O jogador atacante diz um par de coordenadas (x,y) a disparar na grelha no adversário
+			+ Se existir um navio nessa posição, afunda esse segmento
+		* Próximo jogador
+
