@@ -111,7 +111,7 @@ class Game(object):
         # Line Top
         print "-" * 25,
         print
-        for row in getPlayer(playerNumber).getMainBoard():
+        for row in self.getPlayer(playerNumber).getFireBoard():
             # Row Numbers
             print str(rowNumber) + " |",
             # Print Board
@@ -121,7 +121,7 @@ class Game(object):
             rowNumber += 1
 
     # Show main board
-    def mainboardShow(self, playerNumber):
+    def mainBoardShow(self, playerNumber):
         rowNumber = 0
         print "Board:\n  |",
         # Column Numbers
@@ -159,12 +159,12 @@ class Game(object):
         self.getPlayer(toss).setTurn()
         print self.getPlayer(self.getPlayerToPlay()).getName() + " starts"
         # First player fills the board
-        self.mainboardShow(self.getPlayerToPlay())
+        self.mainBoardShow(self.getPlayerToPlay())
         self.setStartShips()
         self.setNewTurn()
         # Second player fills the board
         print self.getPlayer(self.getPlayerToPlay()).getName() + " starts"
-        self.mainboardShow(self.getPlayerToPlay())
+        self.mainBoardShow(self.getPlayerToPlay())
         self.setStartShips()
         # Start Game
         self.setNewTurn()
@@ -176,7 +176,7 @@ class Game(object):
             # Checks if all the ships are sunked
             if self.mainboardCheck(self.getPlayerToPlay()):
                 # if the current player have all the ships sunked, loses
-                print "Game Over: Player " + self.getPlayerToAttack() + " wins!"
+                print "Game Over: Player " + str(self.getPlayerToAttack()) + " wins!"
                 break
             else:
                 # Input Command
@@ -187,8 +187,10 @@ class Game(object):
                 command = raw_input()
 
                 if int(command) == 1:
+                    print "Option 1 selected"
                     self.mainBoardShow(self.getPlayerToPlay())
                 elif int(command) == 2:
+                    print "Option 2 selected"
                     self.fireBoardShow(self.getPlayerToPlay())
                 elif int(command) == 3:
                     "Fire to other player board!\nInsert coordinates:"
@@ -196,11 +198,14 @@ class Game(object):
                     x = int(raw_input())
                     print "Y: ",
                     y = int(raw_input())
+                    # TODO - IMPROVE CODE HERE TO A METHOD
                     # Set Player's Fire Board
                     self.getPlayer(self.getPlayerToPlay()).SetFireBoard(x, y, 1)
                     # Set Other Player's Main Board
                     self.getPlayer(self.getPlayerToAttack()).SetMainBoard(x, y, 0)
                     print "Shoot player " + self.getPlayer(self.getPlayerToAttack()).getName() + " at position (" + str(x) + ", " + str(y) + ")"
+                    # Change turns
+                    self.setNewTurn()
                 else:
                     print "Invalid command: Insert a valid number (1, 2 or 3)"
 

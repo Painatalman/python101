@@ -39,15 +39,15 @@ class Player(object):
         return self.__fireboard
 
     def SetFireBoard(self, x, y, type):
-        if validadesCoordinates(x, y):
+        if self.validadesCoordinates(x, y):
             self.__fireboard[y][x] = type
             return True
         else:
             return False
 
     def SetMainBoard(self, x, y, type):
-        if validadesCoordinates(x, y):
-            self.__fireboard[y][x] = type
+        if self.validadesCoordinates(x, y):
+            self.__mainboard[y][x] = type
             return True
         else:
             return False
