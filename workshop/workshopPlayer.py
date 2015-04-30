@@ -8,15 +8,8 @@ class Player(object):
     def __init__(self, name):
         self.__name = name
         self.__turn = False
-        self.__wins = 0
         self.__mainboard = [[0 for i in range(10)] for j in range(10)]
         self.__fireboard = [[0 for i in range(10)] for j in range(10)]
-
-    def addVictory(self):
-        self.__wins += 1
-
-    def getVictories(self):
-        return self.__wins
 
     # Checks if x and y are valid
     def validadesCoordinates(self, x, y):

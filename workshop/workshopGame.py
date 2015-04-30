@@ -11,6 +11,11 @@ class Game(object):
     def __init__(self):
         self.__name = "Battleship"
         self.__player = []
+        self.__options = {
+            "gridSizeX": 10,
+            "gridSizeY": 10,
+            "numberOfPlayers": 2,
+        }
 
     def getPlayer(self, numberOfPlayer):
         if len(self.__player) > 0:
@@ -80,7 +85,7 @@ class Game(object):
                 y = int(raw_input())
                 if self.setShip(x, y, self.getPlayerToPlay()):
                     break
-
+    '''
     # Fires to the other player's board and register the current player action
     def mainboardFire(self, x, y):
         # Check who is the player to fire
@@ -90,7 +95,7 @@ class Game(object):
         else:
             getPlayer(2).SetFireBoard(x, y, 1)
             getPlayer(1).SetMainBoard(x, y, 0)
-
+    '''
     # Checks if all of player's ships are sunked
     def mainboardCheck(self, playerNumber):
         gameOver = True

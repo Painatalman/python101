@@ -1,13 +1,4 @@
-Workshop Structure
-
-Todo
-	* Implementar um dicionário com as opções do tabuleiro do jogo
-	options = {
-		"gridSizeX": 10
-		"gridSizeY": 10
-		"numberOfPlayers": 2
-	}
-
+Workshop
 
 1. Regras do jogo
 	a) Elementos:
@@ -34,4 +25,63 @@ Todo
 		* O jogador atacante diz um par de coordenadas (x,y) a disparar na grelha no adversário
 			+ Se existir um navio nessa posição, afunda esse segmento
 		* Próximo jogador
+
+2. Extrutura do código
+
+	0) Notas
+
+		+ Versão simplificada do jogo!
+			* Se houver tempo melhora-se cada elemento
+			* Apenas 1 navio de 5 secções
+		+ Criação de um grupo no facebook para o pessoal submeter as suas versões do projecto
+
+	a) Dividir o problema em classes
+
+		+ Classe Jogador
+			* Gere os recursos dos jogadores
+		+ Classe Jogo
+			* Interacções entre os jogadores
+
+	b) Identificar o que cada classe vai fazer
+
+		+ Classe Jogador
+
+			Propriedades
+			---
+			* Nome do jogador
+			* Turno do jogador
+			* Tabuleiro de disparos do jogador
+			* Tabuleiro de navios do jogador
+
+			Métodos
+			---
+			* Obter e definir o nome do jogador
+			* Obter e definir o turno do jogador
+			* Obter e definir o tabuleiro de navios do jogador
+			* Obter e definir o tabuleiro de disparos do jogador
+
+		+ Classe Jogo
+
+			Propriedades
+			---
+			* Nome do jogo
+			* Os jogadores envolvido
+			* As opções do jogo
+				- Tamanho do tabuleiro
+				- Número de jogadores
+
+			Métodos
+			---
+			* Obter e definir jogadores
+			* Obter o jogador do turno actual
+			* Obter o jogador que começa primeiro
+			* Passar o turno para o próximo jogador
+			* Define a posição de um navio
+				- Verifica se as coordenadas são válidas (método para isso)
+			* Exibe o tabuleiro dos navios
+			* Exibe o tabuleiro de disparos
+			* Verifica se o jogo terminou
+			* Define a posição inicial dos navios
+			* Definir as funções iniciais do jogo
+			* Definir o loop principal do jogo
 
