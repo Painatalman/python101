@@ -1,9 +1,9 @@
 # Python 101
 
 + Authors: @foxdarkmaster , @painatalman
-+ Version: 0.1.0
++ Version: 0.1.1
 + Created on: 2015-03-10
-+ Last revision on: 2015-05-03
++ Last revision on: 2015-30-08
 
 ### Table of contents
 
@@ -62,6 +62,7 @@ Also, it is the app behind some of the world's most popular websites:
 + [Pinterest][http://pinterest.com/]
 + [Disqus][http://blog.disqus.com/post/62187806135/scaling-django-to-8-billion-page-views]
 + [Bitbucket][]
++ [D&AD Awards][https://www.dandad.org/en/what-is-dandad/]
 + [Mahalo][http://mahalo.com/]
 + [The New York Times][], [The Guardian][http://www.guardiannews.com/] and [The Washington Post][] &mdash; according to [FiveQ][fiveq-django], django was actually born at a newspaper to manage their deadlines;
 + [Mozilla development network][https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform?redirectlocale=en-US&redirectslug=CSS%2Ftext-transform]
