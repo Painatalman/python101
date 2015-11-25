@@ -28,7 +28,6 @@ for fruit in fruits:
 # we think of all numbers [1..10]
 
 # remember
-
 for i in [1:10:1]:
     print i # for (int i=0; i< 10; i++){ ... }
 
@@ -38,9 +37,7 @@ for i in [1:10:2]:
 # however, range() is more common
 
 
-
 # regular for loops
 range(6)
 range(1, 7)
 range(0, 8, 2)
-

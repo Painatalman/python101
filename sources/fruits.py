@@ -6,18 +6,6 @@ for fruit in fruits:
     # each item in the list will now be known as fruits
     print "I would like a %s" % fruit
 
-# but the keyword 'in' can also be used OUTSIDE of a 'for' cycle
-
-
-#
-#
-# Nothing special, just generates a list of items with the word eaten on it
-#
-# @pre must be a list of fruits
-# @param fruits{List} a list of fruits (probably!)
-# @return {List} a new list of fruits
-#
-#
 def eat_fruits(fruits):
 
     return [fruit + " eaten" for fruit in fruits]
